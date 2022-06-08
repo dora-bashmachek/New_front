@@ -1,29 +1,30 @@
 <template>
   <div class="header">
     <div class="content">
-    <div class="body">
-    <div v-if="fetching" class="loading">Loading...</div>
-    <div v-else-if="error" class="error">Oh no... {{ error }}</div>
-    <div v-else>
-      <div v-if="data">
-        <div class="product">
-          <div class="title-img">
-          <h2 class="title">{{ data.products_by_id.title }}</h2>
-          <div class="img"> <img  :src="'http://38.242.229.113:8055/assets/' + data.products_by_id.image.id" alt="">
-          </div>
-          </div>
-          <div class="descr-spec-price">
-          <p class="price">{{ data.products_by_id.price }}$</p>
-          <p class="description">{{ data.products_by_id.description }}</p>
-          <p class="spec">{{ data.products_by_id.spec }}</p>
+      <div class="body">
+        <div v-if="fetching" class="loading">Loading...</div>
+        <div v-else-if="error" class="error">Oh no... {{ error }}</div>
+        <div v-else>
+          <div v-if="data">
+            <div class="product">
+              <div class="title-img">
+                <div class="img"> <img :src="'http://38.242.229.113:8055/assets/' + data.products_by_id.image.id"
+                    alt="">
+                </div>
+              </div>
+              <div class="descr-spec-price">
+                <h2 class="title">{{ data.products_by_id.title }}</h2>
+                <p class="description">{{ data.products_by_id.description }}</p>
+                <p class="price">{{ data.products_by_id.price }}$</p>
+                <!-- <p class="spec">{{ data.products_by_id.spec }}</p> -->
 
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 </template>
 
 <script>
@@ -63,66 +64,71 @@ export default {
 
 <style scoped>
 .header {
-  width: 1200px;
-  margin: 10%;
-  background-color: #fff;
+  /* width: 1200px; */
+  margin: 0% 15% 0% 15%;
+  /* background-color: #fff; */
   font-family: sans-serif;
 }
-.content{
+
+/* .content{
   margin: 0 auto;
+  background-color: aqua;
+} */
+.body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px 20px;
+  flex-direction: column;
 }
-.body{  
+
+.title {
+    font-size: 150%;
+    max-width: 100%;
+    display: block;
+    line-height: 100%;
+    color: #000;
+    text-align: right;
+    margin-bottom: 52px;
+}
+
+.price {
+  font-size: 200%;
+  font-weight: 600;
+  display: flex;
+  flex: 1 1 100%;
+  max-width: 100%;
+  flex-direction: row-reverse;
+  line-height: 100%;
+}
+
+.product {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  padding: 3%;
+  margin: 1%;
+  border: #00000059 solid 0px;
+  border-radius: 3%;
+  /* box-shadow: 0 0 10px 5px rgb(221 222 225); */
+  background-color: #f6f6f6;
+}
+
+.descr-spec-price {
+    text-align: right;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0px 20px;
     flex-direction: column;
 }
-.title{
-  font-size: 150%;   
-  max-width: 100%;
-  margin-bottom: 15%;
-  display: block;
-  line-height: 21px;
-  color: #000;
+.description {
+  display: table-cell;
+  vertical-align: bottom;
 }
-.price{
-font-size: 150%;
-    font-weight: 600;
-    display: flex;
-    flex: 1 1 100%;
-    max-width: 100%;
-    flex-direction: row-reverse;
-}
-.product img{
-    width: 400px;
-    margin-right: 50px;
-    padding: 30px 0px;
-}
-.product{
-    display: flex;
-    text-align: center;
-    align-items: center;
-    padding: 3%;
-    margin: 1%;
-    border: #00000059 solid 0px;
-    border-radius: 3%;
-    box-shadow: 0 0 10px 5px rgb(221 222 225);
-    background-color: #f3f2f1;
-}
-.descr-spec-price{
-  text-align: right;
-}
-.description{ display: table-cell;
-  vertical-align: bottom;}
-.title-img {
-    width: 130%;
 
+.title-img {
+    width: 59%;
 }
-/* .img{
-      border: #00000059 solid 1px;
-    border-radius: 3%;
-    box-shadow: 0 0 10px 5px rgb(221 222 225);
-    background-color: #f3f2f1;
-} */
+
+.img {
+width: 805px;
+}
 </style>

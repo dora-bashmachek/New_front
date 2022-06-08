@@ -1,11 +1,12 @@
 <template>
   <div class="header">
-    <div class="content">
+
     <div class="body">
       <div class="shapka">
-        <img src="./images/Снимок экрана (1).png" alt="">
-        <p class="prod">Products</p>
+        <img class="immg" src="./images/Снимок экрана (2).png" alt="">
+        <!-- <p class="prod">Products</p> -->
       </div>
+      <div class="content">
       <div class="search d4">
        <input  type="text" v-model="search" placeholder="search"/>
     </div>
@@ -75,51 +76,30 @@ export default {
 </script>
 
 <style scoped>
-/* .d4 form {
-  background: #fffffe;
-  border-bottom: 4px solid #d9dcd9;
-}
-.d4 input, .d4 button {
-  outline: none;
-  background: transparent;
-}
-.d4 input {
-  width: 100%;
-  height: 42px;
-  padding-left: 15px;
-}
-.d4 button {
-  height: 42px;
-  width: 42px;
-  position: absolute;
-    top: 444px;
-    right: 180px;
-  cursor: pointer;
-}
-.d4 button:before {
-  content: "\f178";
-  font-family: FontAwesome;
-  font-size: 20px;
-  color: #be290e;
-} */
 .shapka{
-    /* background-image: url(https://cdn0.ipoint.kz/AfrOrF3gWeDA6VOlDG4TzxMv39O7MXnF4CXpKUwGqRM/resize:fit:1400:600:0/q:100/plain/s3://complex-images/29/3284/2100-ru.png@webp); */
-    height: 430px;
-    width: 1270px;
+    height: 450px;
+    width: 100%;
     display: flex;
     align-items: center;
+    background-color: #000;
+    justify-content: space-around;
 }
 input {
-  margin: 20px 0px 0px 0px;
-  height: 24px;
-  width: 249px;
-  margin-right: 19px;
-  border-color: #e96d65;
-  border-radius: 7px;
+    margin: 20px 0px 0px 0px;
+    height: 24px;
+    width: 249px;
+    margin-right: 19px;
+    border-color: #c7cdd6;
+    border-radius: 7px;
 }
-/* input[type="text"]::-webkit-input-placeholder {
-    color: #e96d65;
-   }  */
+input:hover {
+     margin: 20px 0px 0px 0px;
+    height: 24px;
+    width: 249px;
+    margin-right: 19px;
+    border-color: #bdbdbd;
+    border-radius: 7px; 
+}
 .prod{
    margin: 0px;
   padding:0px ;
@@ -162,7 +142,7 @@ input {
     margin: 3%;
     border: #00000059 solid 1px;
     border-radius: 3%;
-    box-shadow: inset 0 0 10px 5px rgb(214 216 211);
+    box-shadow: inset 0 0 10px 5px rgb(181 188 200);
     text-align: left;
     width: 266px;
     /* border: 1px solid #ffffff00; */
@@ -210,13 +190,14 @@ input {
     /* word-break: break-word; */
 }
 .price{
-  font-size: 100%;
-  font-weight:600;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-end;
-  flex: 1 1 100%;
-  max-width: 100%;
+    font-size: 100%;
+    font-weight: 600;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    flex: 1 1 100%;
+    max-width: 100%;
+    justify-content: center;
 }
 .title-price {
   display: flex;
