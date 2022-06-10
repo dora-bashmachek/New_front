@@ -1,5 +1,6 @@
 <template>
   <div class="header">
+<!-- <div class="logo">PRO <p>sto</p></div> -->
     <div class="content">
       <div class="body">
         <div v-if="fetching" class="loading">Loading...</div>
@@ -63,6 +64,15 @@ export default {
 </script>
 
 <style scoped>
+.header{background-color: #f6f6f6;}
+.logo{
+    display: flex;
+    justify-content: center;
+    font-size: 350%;
+    align-items: center;
+    margin: 1%;
+    height: 10px;
+}
 .header {
   /* width: 1200px; */
   margin: 0% 15% 0% 15%;
@@ -103,15 +113,15 @@ export default {
 }
 
 .product {
-  display: flex;
-  text-align: left;
-  align-items: center;
-  padding: 3%;
-  margin: 1%;
-  border: #00000059 solid 0px;
-  border-radius: 3%;
-  /* box-shadow: 0 0 10px 5px rgb(221 222 225); */
-  background-color: #f6f6f6;
+    display: flex;
+    text-align: left;
+    align-items: center;
+    padding: 3%;
+    margin: 2%;
+    border: #00000059 solid 0px;
+    border-radius: 3%;
+    /* box-shadow: 0 0 10px 5px rgb(221 222 225); */
+    background-color: #f6f6f6;
 }
 
 .descr-spec-price {

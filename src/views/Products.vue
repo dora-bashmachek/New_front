@@ -1,12 +1,14 @@
 <template>
   <div class="header">
-
+<!-- <div class="logo">PRO <p class="sto">sto</p></div> -->
     <div class="body">
       <div class="shapka">
-        <img class="immg" src="./images/Снимок экрана (2).png" alt="">
+        <img class="immg" src="./images/Снимок экрана (12).png" alt="">
         <!-- <p class="prod">Products</p> -->
       </div>
       <div class="content">
+      <!-- <p class="title-pro">Products</p> -->
+      <!-- <p class="skobka">)</p> -->
       <div class="search d4">
        <input  type="text" v-model="search" placeholder="search"/>
     </div>
@@ -76,12 +78,40 @@ export default {
 </script>
 
 <style scoped>
+
+.logo{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 350%;
+    align-items: center;
+    /* margin: 1%; */
+    padding-left: 1%;
+    color: white;
+    background-color: black;
+    height: 62px;
+  text-shadow: 7px -4px 5px #e7dec4, 0 0 5em #e7dec4;
+    }
+.sto{
+  color: #e7dec4;
+   text-shadow: 7px -4px 5px white, 0 0 5em white;
+}
+.icon{
+font-size: 16%;
+}
+.skobka{
+  position: relative;
+}
+.title-pro{
+    display: flex;
+    justify-content: center;
+    font-size: 200%;
+}
 .shapka{
-    height: 450px;
+    height: 650px;
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: #000;
+    background-color: #f6f6f6;
     justify-content: space-around;
 }
 input {
