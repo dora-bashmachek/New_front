@@ -2,7 +2,7 @@
   <div>
     <div class="menu">
       <div style="display: flex;align-items: baseline;font-size: 49.5px;font-weight: 600;color: rgb(0 0 0);font-weight: initial;">
-      <h1 class="pro">PRO</h1><h1 class="sto">sto.</h1></div>
+      <h1 class="pro">I-</h1><h1 class="sto">shop.</h1></div>
     <div class="menuu"><RouterLink to="/">Home</RouterLink> <p style="color:#2c5592">|</p>
     <RouterLink to="/products">Products</RouterLink>
     </div></div>
@@ -47,13 +47,14 @@ font-weight: bold;
 }
 .pro {
 color: black;
-    color: #646f81;
-    text-shadow: 7px -4px 3px #646f81, 0 0 0em #657081;
+    /* color: #646f81; */
+    /* text-shadow: 7px -4px 3px #646f81, 0 0 0em #657081; */
     /* text-decoration: line-through; */
     }
     .sto{
-    color: #e8e8e6;
-    text-shadow: 7px -4px 3px #68748a, 0 0 0em #646f81;
+    /* color: #e8e8e6; */
+color: black;
+    /* text-shadow: 7px -4px 3px #68748a, 0 0 0em #646f81; */
 }
 .header
 {background-color: #f6f6f6;}
