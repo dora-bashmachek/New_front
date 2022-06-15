@@ -28,87 +28,88 @@
 </template>
 
 <script>
-import { useQuery, gql } from "@urql/vue";
-import { ref } from "@vue/reactivity";
-import { useRouter, useRoute } from 'vue-router'
+import { useQuery, gql, useMutation } from "@urql/vue";
+import { ref } from 'vue'
+import axios from 'axios'
+import { useRouter, useRoute } from "vue-router";
+import { onMounted } from '@vue/runtime-core';
+
 
 export default {
   setup() {
-    const search = ref(null);
-    const router = useRouter()
+      const search = ref(null);
+    const router = useRouter();
     const route = useRoute();
-    // const result = useQuery(
-    //   {
-    //     query: `
-    //     query($search: String) {
-    //       products(search: $search) {
-    //         id
-    //         title
-    //         price
-    //         spec
-    //         image {
-    //           id
-    //         }
-    //       }
-    //     }
-    //   `, variables: { search }
-    //   },
-    // );
-    const limit = ref(10);
-    const getProductsQuery = gql` 
-      query($limit: Int! = 10) {
-        products(limit: $limit) {
-          id
-          title
-          price
-          description
-        }
-      }
-    `;
-    
-    const getProducts = useQuery(
-      { 
-      query: 
-      getProductsQuery, 
-      variables: { limit }, 
-       query: `
- query($search: String) {
-          products(search: $search) {
-            id
-            title
-            price
-            spec
-            image {
-              id
-            }
-          }
-        }
-       `, variables: { search } 
-      }
-      ); // TODO: rename to products
+
+    const add = useMutation(
+       `
+    mutation ($ProductId: Int!, $UserId: String!) {
+  create_junction_directus_users_products_item(
+    data: { products_id: $ProductId, directus_users_id: $UserId }
+  ) {
+    id
+  }
+}
+      ` 
+
+    );
+
+   
+    const result = useQuery({
+      query: gql`
+        query {
+products {
+  id
+  title
+  price
+  image {
+    id
+  }
+}
+}
+      `,
+      variables: { search },
+    });
+
+
     function searchProducts() {
       result.executeQuery()
     }
+    
 
     function move(id) {
-      router.push("/products/" + id)
+      router.push("/products/" + id);
+    }
+
+    async function addFav(id) {
+      const { data } = await axios.get("http://38.242.229.113:8055/users/me", {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const i = id
+      const a = parseInt(i)
+      const u = data.data.id
+      const variables = { ProductId: a, UserId: u }
+      add.executeMutation(variables).then((result) => {
+        if (result.error) {
+          console.error("Oh no!", result.error);
+        }
+      });
     }
 
     return {
       search,
-       fetching: getProducts.fetching,
-      data: getProducts.data,
-      error: getProducts.error,
-      limit,
-      // fetching: result.fetching,
-      // data: result.data,
-      // error: result.error,
+      fetching: result.fetching,
+      data: result.data,
+      error: result.error,
       searchProducts,
-      move
+      move,
+      addFav
     };
   },
 };
-</script>
+</script> 
 
 <style scoped>
 

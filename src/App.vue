@@ -4,7 +4,8 @@
       <div style="display: flex;align-items: baseline;font-size: 49.5px;font-weight: 600;color: rgb(0 0 0);font-weight: initial;">
       <h1 class="pro">I-</h1><h1 class="sto">shop.</h1></div>
     <div class="menuu"><RouterLink to="/">Home</RouterLink> <p style="color:#2c5592">|</p>
-    <RouterLink to="/products">Products</RouterLink>
+    <RouterLink to="/products">Products</RouterLink> <p style="color:#2c5592">|</p> 
+    <RouterLink to="/login">Login</RouterLink>
     </div></div>
     <RouterView />
 
@@ -12,9 +13,21 @@
 </template>
 
 <script>
+import { createClient, provideClient } from '@urql/vue';
 export default {
   setup() {
-
+    const client = createClient({
+      url: "http://38.242.229.113:8055/graphql",
+      fetchOptions: () => {
+      
+      const token = localStorage.getItem('token')
+      return {
+        headers: { authorization: token ? `Bearer ${token}` : '' }
+      };
+    },
+    });
+    
+    provideClient(client);
   }
 }
 </script>
