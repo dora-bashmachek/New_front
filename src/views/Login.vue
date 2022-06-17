@@ -1,16 +1,20 @@
 <template>
   <div>
     <div class="flexin">
+            <div class="kartinka">
+    <img class="immg" src="./images/Снимок экрана (18).png" alt="">
+  </div>
     <div class="flex">
     <div class="part1">
-      <input type="text" name="first" placeholder="Write your name" />
-      <input type="text" name="last" placeholder="Write your last name" />
-      <input type="email" name="email" placeholder="Write your email" />
-      <input
-        type="password"
-        name="password"
-        placeholder="Write your password"
-      />
+<div class="group">
+      <input class="" type="text"  name="first" id="name" placeholder="Write your name" /> </div>
+<div class="group">
+      <input type="text" name="last" placeholder="Write your last name" id="last name"/></div>
+<div class="group">
+      <input type="email" name="email" placeholder="Write your email" id="email"/></div>
+      <div class="group">
+      <input type="password" name="password" placeholder="Write your password"
+      /></div>
       <button @click="createUser" class="card-text-button">Завершить регистрацию</button>
     </div>
     <div class="flx">
@@ -20,13 +24,13 @@
       <input
         type="email"
         name="auth_email"
-        value="a@example.com"
+        value="f@example.com"
         placeholder="Write your email"
       />
       <input
         type="password"
         name="auth_password"
-        value="123"
+        value="1234"
         placeholder="Write your password"
       />
       <button @click="getAuth" class="card-text-button">Войти</button>
@@ -45,7 +49,7 @@ export default {
   setup() {
     const me_email = ref('') 
     const me_id = ref('')
-
+    const status = [200, 201, 202, 203, 204]
     
     async function user_me () {
        const { data } = await axios.get("http://38.242.229.113:8055/users/me", {
@@ -70,7 +74,13 @@ export default {
         data
       );
       localStorage.setItem('token', result.data.data.access_token);
+      if (status.includes(result.status)){
+        window.location.href = "/products";
+      }
     }
+
+
+
     async function createUser() {
       const first = document.querySelector("input[name=first]").value;
       const last = document.querySelector("input[name=last]").value;
@@ -99,11 +109,31 @@ export default {
 </script>
 
 <style scoped>
+/* .group{
+  position: relative;
+  margin-bottom: 30px;
+  } */
+  input{
+  font-size: 16px;
+  padding: 10px;
+  display: block;
+  width: 300px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  }
+.kartinka {
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    padding-bottom: 4%;
+    padding-right: 5%;
+    width: 30%;
+}
 .flex{
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    padding-top: 5%;
 }
 .flexin{
     display: flex;
@@ -149,7 +179,7 @@ input {
   cursor: pointer;
   margin-top: 19px;
       border-radius: 5px;
-      width: 286px;
+      width: 311px;
       text-align: center;
 }
 .card-text-button:hover {

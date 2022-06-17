@@ -19,8 +19,12 @@
           <p class="price">{{ p.price }}$</p>
           </div>
         </div>
-        <button @click="limit += 10">show more</button>
       </div>
+      <div class="showmore">
+          <div>
+        <a @click="limit += 10">show more</a>
+        </div>
+        </div>
     </div> 
   </div>
 </div>
@@ -29,53 +33,48 @@
 
 <script>
 import { useQuery, gql, useMutation } from "@urql/vue";
-import { ref } from 'vue'
-import axios from 'axios'
+import { ref } from "vue";
+import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
-import { onMounted } from '@vue/runtime-core';
-
+import { onMounted } from "@vue/runtime-core";
 
 export default {
   setup() {
-      const search = ref(null);
+    const search = ref(null);
     const router = useRouter();
     const route = useRoute();
-
+    const limit = ref(8)
     const add = useMutation(
-       `
-    mutation ($ProductId: Int!, $UserId: String!) {
-  create_junction_directus_users_products_item(
-    data: { products_id: $ProductId, directus_users_id: $UserId }
-  ) {
-    id
-  }
-}
-      ` 
-
+      gql`
+        mutation ($ProductId: Int!, $UserId: String!) {
+          create_junction_directus_users_products_item(
+            data: { products_id: $ProductId, directus_users_id: $UserId }
+          ) {
+            id
+          }
+        }
+      `
     );
 
-   
     const result = useQuery({
       query: gql`
-        query {
-products {
-  id
-  title
-  price
-  image {
-    id
-  }
-}
-}
-      `,
-      variables: { search },
+        query($search: String, $limit: Int! = 8) {
+          products(search: $search, limit: $limit) {
+            id
+            title
+            price
+            image {
+              id
+            }
+          }
+        }
+      `, variables: { search, limit }
     });
-
 
     function searchProducts() {
       result.executeQuery()
     }
-    
+
 
     function move(id) {
       router.push("/products/" + id);
@@ -84,13 +83,13 @@ products {
     async function addFav(id) {
       const { data } = await axios.get("http://38.242.229.113:8055/users/me", {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
-      const i = id
-      const a = parseInt(i)
-      const u = data.data.id
-      const variables = { ProductId: a, UserId: u }
+      const i = id;
+      const a = parseInt(i);
+      const u = data.data.id;
+      const variables = { ProductId: a, UserId: u };
       add.executeMutation(variables).then((result) => {
         if (result.error) {
           console.error("Oh no!", result.error);
@@ -105,14 +104,21 @@ products {
       error: result.error,
       searchProducts,
       move,
-      addFav
+      addFav,
+      limit
     };
   },
 };
 </script> 
 
 <style scoped>
-
+.showmore{
+ font-size: 200%;
+    display: flex;
+    justify-content: center;
+        padding-bottom: 5%;
+        cursor: pointer;
+}
 .logo{
   display: flex;
   justify-content: flex-start;
