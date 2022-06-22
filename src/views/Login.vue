@@ -109,10 +109,7 @@ export default {
 </script>
 
 <style scoped>
-/* .group{
-  position: relative;
-  margin-bottom: 30px;
-  } */
+
   input{
   font-size: 16px;
   padding: 10px;
@@ -125,8 +122,8 @@ export default {
     display: flex;
     align-items: center;
     flex-direction: column-reverse;
-    padding-bottom: 4%;
-    padding-right: 5%;
+    padding-bottom: 6%;
+    padding-right: 7%;
     width: 30%;
 }
 .flex{

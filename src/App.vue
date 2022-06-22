@@ -5,7 +5,8 @@
       <h1 class="pro">I-</h1><h1 class="sto">shop.</h1></div>
     <div class="menuu"><RouterLink to="/">Home</RouterLink> <p style="color:#2c5592">|</p>
     <RouterLink to="/products">Products</RouterLink> <p style="color:#2c5592">|</p> 
-    <RouterLink to="/login">Login</RouterLink>
+    <RouterLink to="/login">Login</RouterLink> <p style="color:#2c5592">|</p> 
+    <RouterLink to="/cart">Cart</RouterLink>
     </div></div>
     <RouterView />
 

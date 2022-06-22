@@ -1,6 +1,5 @@
 <template>
   <div class="header">
-<!-- <div class="logo">PRO <p>sto</p></div> -->
     <div class="content">
       <div class="body">
         <div v-if="fetching" class="loading">Loading...</div>
@@ -17,8 +16,7 @@
                 <h2 class="title">{{ data.products_by_id.title }}</h2>
                 <p class="description">{{ data.products_by_id.description }}</p>
                 <p class="price">{{ data.products_by_id.price }}$</p>
-                <!-- <p class="spec">{{ data.products_by_id.spec }}</p> -->
-
+                <a href="#"><button class="card-text-button" @click="addToCart(data.products_by_id.id)">add to cart</button></a>
               </div>
             </div>
           </div>
