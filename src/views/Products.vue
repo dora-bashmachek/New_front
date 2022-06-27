@@ -12,12 +12,20 @@
     <div v-else-if="error" class="error">Oh no... {{ error }}</div>
     <div v-else>
       <div v-if="data" class="products">
-        <div v-for="p in data.products" :key="p.id" @click="move(p.id)" class="product_card">
+        <div v-for="p in data.products" :key="p.id"  class="product_card">
+        <div class="fav-into" @click="addFav(p.id)">
+          <div class="fav">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+</svg></div>
+        </div>
+        <div @click="move(p.id)" >
           <img class="img" :src="'http://38.242.229.113:8055/assets/' + p?.image?.id + '?width=190&height=200'" alt="">
           <div class="title-price">
           <p class="title">{{ p.title }}</p>
           <p class="price">{{ p.price }}$</p>
           </div>
+        </div>
         </div>
       </div>
       <div class="showmore">
@@ -109,9 +117,24 @@ export default {
     };
   },
 };
-</script> 
+</script>
 
 <style scoped>
+.fav-into{
+    display: flex;
+    flex-direction: row-reverse;
+}
+svg.h-6.w-6 {
+    width: 100%;
+}
+.fav{
+    width: 10%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.fav:hover {
+  color: rgb(138 152 235);
+}
 .showmore{
  font-size: 200%;
     display: flex;

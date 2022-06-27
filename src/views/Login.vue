@@ -24,13 +24,13 @@
       <input
         type="email"
         name="auth_email"
-        value="f@example.com"
+        value="dora@example.com"
         placeholder="Write your email"
       />
       <input
         type="password"
         name="auth_password"
-        value="1234"
+        value="123"
         placeholder="Write your password"
       />
       <button @click="getAuth" class="card-text-button">Войти</button>
