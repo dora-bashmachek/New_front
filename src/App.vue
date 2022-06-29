@@ -40,6 +40,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-around;
+        border-bottom: 1px solid;
     /* box-shadow: rgb(44 85 146) 0px 19px 38px -29px inset; */
 }
 .menu h1{ 
@@ -70,8 +71,8 @@ color: black;
 color: black;
     /* text-shadow: 7px -4px 3px #68748a, 0 0 0em #646f81; */
 }
-.header
-{background-color: #f6f6f6;}
+/* .header
+{background-color: #f6f6f6;} */
 .logo{
 display: flex;
     justify-content: center;

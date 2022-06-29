@@ -19,7 +19,7 @@
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
 </svg></div>
         </div>
-        <div @click="move(p.id)" >
+        <div @click="move(p.id)">
           <img class="img" :src="'http://38.242.229.113:8055/assets/' + p?.image?.id + '?width=190&height=200'" alt="">
           <div class="title-price">
           <p class="title">{{ p.title }}</p>
@@ -212,6 +212,7 @@ input:hover {
   align-items: inherit;
   margin: 0px 0px;
   flex-direction: column;
+  background-color: #f5f5f7;
 }
 .search {
   display: flex;
@@ -227,20 +228,21 @@ input:hover {
   justify-content: flex-start;;
 }
 .product_card{
-  width: 41%;
-  padding: 2%;
-  margin: 1%;
-  box-shadow: inset 0 0 10px 5px rgb(232 234 237);
-  text-align: left;
-  width: 266px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-bottom: 30px;
-  font-size: 18px;
-  line-height: 21px;
-  color: #000;
+    /* width: 40%; */
+    padding: 2%;
+    margin: 1%;
+    box-shadow: inset 0 0 10px 5px rgb(232 234 237);
+    text-align: left;
+    width: 19%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000;
+    justify-content: space-between;
+    background-color: #f6f6f6;
 }
 .product_card:hover {
   transition: 0.5s;

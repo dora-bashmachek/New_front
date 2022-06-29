@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="background">
     <div class="flexin">
             <div class="kartinka">
     <img class="immg" src="./images/Снимок экрана (18).png" alt="">
@@ -109,6 +109,9 @@ export default {
 </script>
 
 <style scoped>
+.background{
+  background: #fafafa;
+}
 
   input{
   font-size: 16px;

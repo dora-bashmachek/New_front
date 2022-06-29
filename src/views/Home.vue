@@ -1,6 +1,7 @@
-<template class="header">
+<template >
   <div >
       <div class="flex">
+        
         <div class="text">
       <h1 class="welcome">Welcome!</h1>
         <ul><h2 class="why">why us?</h2>
@@ -23,6 +24,14 @@ export default {
 
 
 <style scoped>
+.menu{ 
+    background-color: #ffffff;;
+    /* height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around; */
+    /* box-shadow: rgb(44 85 146) 0px 19px 38px -29px inset; */
+}
 .flex{
  display: flex;
   flex-wrap: wrap;

@@ -1,5 +1,5 @@
-<template>
-  <div class="header">
+<template class="header">
+  <div>
     <div class="content">
       <div class="body">
         <div v-if="fetching" class="loading">Loading...</div>
@@ -16,7 +16,7 @@
                 <h2 class="title">{{ data.products_by_id.title }}</h2>
                 <p class="description">{{ data.products_by_id.description }}</p>
                 <p class="price">{{ data.products_by_id.price }}$</p>
-                <a href="#"><button class="card-text-button" @click="addToCart(data.products_by_id.id)">add to cart</button></a>
+                <a href="#"><button class="card-text-button" @click="addToCart(data.products_by_id)">add to cart</button></a>
               </div>
             </div>
           </div>
@@ -28,8 +28,9 @@
 
 <script>
 import axios from "axios";
-import { useQuery, useMutation } from "@urql/vue";
+import { useQuery, useMutation, gql } from "@urql/vue";
 import { useRouter, useRoute } from 'vue-router'  
+import { addToCart } from '../utils/cart'
 
 export default {
   setup() {
@@ -53,46 +54,52 @@ export default {
       `, variables: { id }
     });
 
-    const addToCartP = useMutation(
-       `
-    mutation ($ProductId: Int!, $UserId: String!) {
-  create_junction_directus_users_products_1_item(
-    data: { products_id: $ProductId, directus_users_id: $UserId }
-  ) {
-    id
-  }
-}
-      ` 
-    ); 
-    async function addToCart(id) {
-      const { data } = await axios.get("http://38.242.229.113:8055/users/me", {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      const i = id
-      const a = parseInt(i)
-      const u = data.data.id
-      const variables = { ProductId: a, UserId: u }
-      addToCartP.executeMutation(variables).then((result) => {
-        if (result.error) {
-          console.error("Oh no!", result.error);
-        }
-      });
-    }
+//     const addToCartP = useMutation(
+//        `
+//     mutation ($ProductId: Int!, $UserId: String!) {
+//   create_junction_directus_users_products_1_item(
+//     data: { products_id: $ProductId, directus_users_id: $UserId }
+//   ) {
+//     id
+//   }
+// }
+//       ` 
+//     ); 
+    // async function addToCart(id) {
+    //   const { data } = await axios.get("http://38.242.229.113:8055/users/me", {
+    //     headers: {
+    //       'Authorization': `Bearer ${localStorage.getItem('token')}`
+    //     }
+    //   });
+    //   const i = id
+    //   const a = parseInt(i)
+    //   const u = data.data.id
+    //   const variables = { ProductId: a, UserId: u }
+    //   addToCartP.executeMutation(variables).then((result) => {
+    //     if (result.error) {
+    //       console.error("Oh no!", result.error);
+    //     }
+    //   });
+    // }
 
     return {
       fetching: result.fetching,
       data: result.data,
       error: result.error,
       route,
-      addToCart
+      addToCart,
     }
   },
 };
 </script>
 
 <style scoped>
+div {
+    background-color: #f6f6f6;
+}
+/* html {
+    background-color: #f5f5f7;
+} */
 .header{background-color: #f6f6f6;}
 .logo{
   display: flex;
@@ -104,6 +111,8 @@ export default {
 }
 .header {
   margin: 0% 15% 0% 15%;
+  
+  background-color: #f6f6f6;
 }
 .body {
   display: flex;
@@ -111,6 +120,7 @@ export default {
   align-items: center;
   margin: 0px 20px;
   flex-direction: column;
+  background-color: #f6f6f6;
 }
 
 .title {
