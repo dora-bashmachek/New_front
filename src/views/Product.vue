@@ -54,34 +54,6 @@ export default {
       `, variables: { id }
     });
 
-//     const addToCartP = useMutation(
-//        `
-//     mutation ($ProductId: Int!, $UserId: String!) {
-//   create_junction_directus_users_products_1_item(
-//     data: { products_id: $ProductId, directus_users_id: $UserId }
-//   ) {
-//     id
-//   }
-// }
-//       ` 
-//     ); 
-    // async function addToCart(id) {
-    //   const { data } = await axios.get("http://38.242.229.113:8055/users/me", {
-    //     headers: {
-    //       'Authorization': `Bearer ${localStorage.getItem('token')}`
-    //     }
-    //   });
-    //   const i = id
-    //   const a = parseInt(i)
-    //   const u = data.data.id
-    //   const variables = { ProductId: a, UserId: u }
-    //   addToCartP.executeMutation(variables).then((result) => {
-    //     if (result.error) {
-    //       console.error("Oh no!", result.error);
-    //     }
-    //   });
-    // }
-
     return {
       fetching: result.fetching,
       data: result.data,

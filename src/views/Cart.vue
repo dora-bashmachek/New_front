@@ -1,27 +1,44 @@
 <template>
-  <div>
-    <div
-      class="border-2 border-black mb-2 p-4"
-      v-for="(p, index) in cart"
-      :key="p.id"
-    >
-      <p>{{ p.title }}</p>
-      <p>{{ p.price }}</p>
-      <button
-        @click="deleteFromCartLocal(index)"
-        class="border-2 border-black p-1 hover:text-white hover:bg-black"
-      >
-        delete from cart
-      </button>
+<div>
+<div class="container">
+  <div class="row">
+    <div class="product-list-item">
+        <div class="no-gutters ">
+     <!-- <div class="product-about"> -->
+     <div class="product-about" v-for="(p, index) in cart"
+      :key="p?.id" >
+        <div class="product-image">
+     <img class="img" :src="'http://38.242.229.113:8055/assets/' + p?.image?.id + '?width=190&height=200'" alt="">
+     </div> 
+     <div class="product-description">
+      <div>
+      <div class="descr-name">
+      <p class="product-name">{{p?.title}}</p>
+      
+      </div>
+      <div class="description">
+      <p> {{p?.description}} </p>
+      </div> 
+      
+      </div>
+      </div>
+      <div class="product-prices">
+      <p>{{p?.price}} $</p>
+      </div>
+      <div class="delete" @click="deleteFromCartLocal(index)">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+</svg>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+    <!-- </div> -->
     </div>
   </div>
 </template>
-
-
-
-
-
-<script>
+ <script>
 import { ref } from '@vue/reactivity';
 import { deleteFromCart } from '../utils/cart'
 export default {
@@ -39,9 +56,7 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-
 .delete{
   display: flex;
 font-size: 160%;
@@ -69,7 +84,7 @@ cursor: pointer;
 .product-prices {
     display: flex;
     align-items: center;
-    width: 3%;
+    width: 5%;
     padding-right: 3%;
     padding-left: 3%;
     border-left: 1px solid #e5e5e5;
@@ -82,7 +97,6 @@ cursor: pointer;
     max-width: 100%;
     font-family: SF UI Text,Arial,sans-serif;
     position: relative;
-    background-color: white;
 }
 .no-gutters {
     margin-right: 0;
@@ -119,3 +133,4 @@ border-right: 1px solid #e5e5e5;
     margin-bottom: 5px;
 }
 </style>
+   

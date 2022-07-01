@@ -13,11 +13,18 @@
     <div v-else>
       <div v-if="data" class="products">
         <div v-for="p in data.products" :key="p.id"  class="product_card">
+        <div class="cart-fav">
+        <div class="cart-into" >
+      
+          <svg id="cart" @click="addToCart(p)" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+        
+        </div>
         <div class="fav-into" @click="addFav(p.id)">
-          <div class="fav">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+         
+          <svg id="fav" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-</svg></div>
+</svg>
+        </div>
         </div>
         <div @click="move(p.id)">
           <img class="img" :src="'http://38.242.229.113:8055/assets/' + p?.image?.id + '?width=190&height=200'" alt="">
@@ -44,6 +51,7 @@ import { useQuery, gql, useMutation } from "@urql/vue";
 import { ref } from "vue";
 import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
+import { addToCart } from '../utils/cart'
 import { onMounted } from "@vue/runtime-core";
 
 export default {
@@ -113,26 +121,35 @@ export default {
       searchProducts,
       move,
       addFav,
-      limit
+      addToCart,
+      limit,
+      
     };
   },
 };
 </script>
 
 <style scoped>
-.fav-into{
+.cart-fav{
+  display: flex;
+}
+.fav-into .cart-into{
     display: flex;
-    flex-direction: row-reverse;
 }
 svg.h-6.w-6 {
-    width: 100%;
+    width: 20%;
 }
-.fav{
+svg.w-6 .h-6{
+    width: 20%;
+}
+.fav .cart{
     width: 10%;
     display: flex;
-    flex-direction: row-reverse;
 }
-.fav:hover {
+#fav:hover {
+  color: rgb(138 152 235);
+}
+#cart:hover {
   color: rgb(138 152 235);
 }
 .showmore{
