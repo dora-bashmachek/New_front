@@ -9,22 +9,20 @@
        <input  type="text" v-model="search" placeholder="search"/>
     </div>
     <div v-if="fetching" class="loading">Loading...</div>
-    <div v-else-if="error" class="error">Oh no... {{ error }}</div>
-    <div v-else>
       <div v-if="data" class="products">
         <div v-for="p in data.products" :key="p.id"  class="product_card">
         <div class="cart-fav">
-        <div class="cart-into" >
+      
       
           <svg id="cart" @click="addToCart(p)" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
         
-        </div>
-        <div class="fav-into" @click="addFav(p.id)">
+      
+        
          
-          <svg id="fav" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg @click="addFav(p.id)" id="fav" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
   <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
 </svg>
-        </div>
+        
         </div>
         <div @click="move(p.id)">
           <img class="img" :src="'http://38.242.229.113:8055/assets/' + p?.image?.id + '?width=190&height=200'" alt="">
@@ -40,7 +38,7 @@
         <a @click="limit += 10">show more</a>
         </div>
         </div>
-    </div> 
+    
   </div>
 </div>
 </div>
@@ -59,7 +57,7 @@ export default {
     const search = ref(null);
     const router = useRouter();
     const route = useRoute();
-    const limit = ref(8)
+    
     const add = useMutation(
       gql`
         mutation ($ProductId: Int!, $UserId: String!) {
@@ -72,20 +70,42 @@ export default {
       `
     );
 
-    const result = useQuery({
-      query: gql`
-        query($search: String, $limit: Int! = 8) {
-          products(search: $search, limit: $limit) {
+    // const result = useQuery({
+    //   query: gql`
+    //     query($search: String, $limit: Int! = 8) {
+    //       products(search: $search, limit: $limit) {
+    //         id
+    //         title
+    //         price
+    //         image {
+    //           id
+    //         }
+    //       }
+    //     }
+    //   `, variables: { search, limit }
+    // });
+
+
+
+
+
+   const limit = ref(8);
+    const getProductsQuery = gql` 
+      query($limit: Int! = 8, $search: String) {
+        products(limit: $limit, search: $search) {
+          id
+          title
+          price
+          image {
             id
-            title
-            price
-            image {
-              id
-            }
           }
         }
-      `, variables: { search, limit }
-    });
+      }
+    `
+    const getProducts = useQuery({ query: getProductsQuery, variables: { limit, search } });
+
+
+   
 
     function searchProducts() {
       result.executeQuery()
@@ -115,14 +135,15 @@ export default {
 
     return {
       search,
-      fetching: result.fetching,
-      data: result.data,
-      error: result.error,
+      fetching: getProducts.fetching,
+      data: getProducts.data,
+      error: getProducts.error,
       searchProducts,
       move,
       addFav,
       addToCart,
       limit,
+      getProducts
       
     };
   },
@@ -130,18 +151,24 @@ export default {
 </script>
 
 <style scoped>
+
 .cart-fav{
   display: flex;
+  justify-content: flex-end;
 }
-.fav-into .cart-into{
-    display: flex;
+.fav-into{
+    width: 100%;
 }
-svg.h-6.w-6 {
-    width: 20%;
+.cart-into{
+    width: 100%;
 }
-svg.w-6 .h-6{
-    width: 20%;
+svg {
+    width: 10%;
+     padding-left: 5%;
 }
+/* svg.w-6 .h-6{
+    width: 21%;
+} */
 .fav .cart{
     width: 10%;
     display: flex;
@@ -186,7 +213,7 @@ svg.w-6 .h-6{
   font-size: 200%;
 }
 .shapka{
-  height: 650px;
+  height: 535px;
   width: 100%;
   display: flex;
   align-items: center;

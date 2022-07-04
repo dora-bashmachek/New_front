@@ -126,7 +126,7 @@ export default {
     align-items: center;
     flex-direction: column-reverse;
     padding-bottom: 6%;
-    padding-right: 7%;
+    padding-right: 10%;
     width: 30%;
 }
 .flex{
