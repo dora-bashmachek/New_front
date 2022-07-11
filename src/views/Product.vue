@@ -3,7 +3,7 @@
     <div class="content">
       <div class="body">
         <div v-if="fetching" class="loading">Loading...</div>
-        <div v-else-if="error" class="error">Oh no... {{ error }}</div>
+        
         <div v-else>
           <div v-if="data">
             <div class="product">

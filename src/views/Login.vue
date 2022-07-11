@@ -1,8 +1,10 @@
 <template>
   <div class="background">
     <div class="flexin">
+      <div v-if="fetching" class="loading">Loading...</div>
+    <div v-else-if="error" class="error">Oh no... {{ error }}</div>
             <div class="kartinka">
-    <img class="immg" src="./images/Снимок экрана (18).png" alt="">
+    <img class="immg" src="./images/Снимок экрана (8).png" alt="">
   </div>
     <div class="flex">
     <div class="part1">
@@ -110,7 +112,7 @@ export default {
 
 <style scoped>
 .background{
-  background: #fafafa;
+ background: #fff;
 }
 
   input{

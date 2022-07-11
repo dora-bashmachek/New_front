@@ -9,6 +9,7 @@
        <input  type="text" v-model="search" placeholder="search"/>
     </div>
     <div v-if="fetching" class="loading">Loading...</div>
+    <div v-else-if="error" class="error">Oh no... {{ error }}</div>
       <div v-if="data" class="products">
         <div v-for="p in data.products" :key="p.id"  class="product_card">
         <div class="cart-fav">
@@ -45,113 +46,108 @@
 </template>
 
 <script>
-import { useQuery, gql, useMutation } from "@urql/vue";
-import { ref } from "vue";
-import axios from "axios";
-import { useRouter, useRoute } from "vue-router";
-import { addToCart } from '../utils/cart'
-import { onMounted } from "@vue/runtime-core";
+  import { useQuery, gql, useMutation } from "@urql/vue";
+  import { ref } from "vue";
+  import axios from "axios";
+  import { useRouter, useRoute } from "vue-router";
+  import { addToCart } from '../utils/cart'
+  import { onMounted } from "@vue/runtime-core";
 
-export default {
-  setup() {
-    const search = ref(null);
-    const router = useRouter();
-    const route = useRoute();
-    
-    const add = useMutation(
-      gql`
-        mutation ($ProductId: Int!, $UserId: String!) {
-          create_junction_directus_users_products_item(
-            data: { products_id: $ProductId, directus_users_id: $UserId }
-          ) {
+  export default {
+    setup() {
+      const search = ref(null);
+      const router = useRouter();
+      const route = useRoute();
+      
+      const add = useMutation(
+        gql`
+          mutation ($ProductId: Int!, $UserId: String!) {
+            create_junction_directus_users_products_item(
+              data: { products_id: $ProductId, directus_users_id: $UserId }
+            ) {
+              id
+            }
+          }
+        `
+      );
+
+      // const result = useQuery({
+      //   query: gql`
+      //     query($search: String, $limit: Int! = 8) {
+      //       products(search: $search, limit: $limit) {
+      //         id
+      //         title
+      //         price
+      //         image {
+      //           id
+      //         }
+      //       }
+      //     }
+      //   `, variables: { search, limit }
+      // });
+
+    const limit = ref(8);
+      const getProductsQuery = gql` 
+        query($limit: Int! = 8, $search: String) {
+          products(limit: $limit, search: $search) {
             id
+            title
+            price
+            image {
+              id
+            }
           }
         }
       `
-    );
-
-    // const result = useQuery({
-    //   query: gql`
-    //     query($search: String, $limit: Int! = 8) {
-    //       products(search: $search, limit: $limit) {
-    //         id
-    //         title
-    //         price
-    //         image {
-    //           id
-    //         }
-    //       }
-    //     }
-    //   `, variables: { search, limit }
-    // });
+      const getProducts = useQuery({ query: getProductsQuery, variables: { limit, search } });
 
 
+    
 
-
-
-   const limit = ref(8);
-    const getProductsQuery = gql` 
-      query($limit: Int! = 8, $search: String) {
-        products(limit: $limit, search: $search) {
-          id
-          title
-          price
-          image {
-            id
-          }
-        }
+      function searchProducts() {
+        result.executeQuery()
       }
-    `
-    const getProducts = useQuery({ query: getProductsQuery, variables: { limit, search } });
 
 
-   
+      function move(id) {
+        router.push("/products/" + id);
+      }
 
-    function searchProducts() {
-      result.executeQuery()
-    }
+      async function addFav(id) {
+        const { data } = await axios.get("http://38.242.229.113:8055/users/me", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        const i = id;
+        const a = parseInt(i);
+        const u = data.data.id;
+        const variables = { ProductId: a, UserId: u };
+        add.executeMutation(variables).then((result) => {
+          if (result.error) {
+            console.error("Oh no!", result.error);
+          }
+        });
+      }
 
-
-    function move(id) {
-      router.push("/products/" + id);
-    }
-
-    async function addFav(id) {
-      const { data } = await axios.get("http://38.242.229.113:8055/users/me", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const i = id;
-      const a = parseInt(i);
-      const u = data.data.id;
-      const variables = { ProductId: a, UserId: u };
-      add.executeMutation(variables).then((result) => {
-        if (result.error) {
-          console.error("Oh no!", result.error);
-        }
-      });
-    }
-
-    return {
-      search,
-      fetching: getProducts.fetching,
-      data: getProducts.data,
-      error: getProducts.error,
-      searchProducts,
-      move,
-      addFav,
-      addToCart,
-      limit,
-      getProducts
-      
-    };
-  },
-};
+      return {
+        search,
+        fetching: getProducts.fetching,
+        data: getProducts.data,
+        error: getProducts.error,
+        searchProducts,
+        move,
+        addFav,
+        addToCart,
+        limit,
+        getProducts
+        
+      };
+    },
+  };
 </script>
 
 <style scoped>
-
 .cart-fav{
   display: flex;
   justify-content: flex-end;

@@ -3,6 +3,8 @@
 <div class="container">
   <div class="row">
     <div class="product-list-item">
+      <div v-if="fetching" class="loading">Loading...</div>
+    <div v-else-if="error" class="error">Oh no... {{ error }}</div>
         <div class="no-gutters ">
      <!-- <div class="product-about"> -->
      <div class="product-about" v-for="(p, index) in cart"
@@ -39,22 +41,22 @@
   </div>
 </template>
  <script>
-import { ref } from '@vue/reactivity';
-import { deleteFromCart } from '../utils/cart'
-export default {
-  setup() {
-    let cart = ref(JSON.parse(sessionStorage.getItem('cart')));
-    const deleteFromCartLocal = (index) => {
-      cart.value.splice(index, 1)
-      deleteFromCart(index)
-    }
-    return {
-      cart,
-      deleteFromCart,
-      deleteFromCartLocal
-    }
-  },
-};
+  import { ref } from '@vue/reactivity';
+  import { deleteFromCart } from '../utils/cart'
+  export default {
+    setup() {
+      let cart = ref(JSON.parse(sessionStorage.getItem('cart')));
+      const deleteFromCartLocal = (index) => {
+        cart.value.splice(index, 1)
+        deleteFromCart(index)
+      }
+      return {
+        cart,
+        deleteFromCart,
+        deleteFromCartLocal
+      }
+    },
+  };
 </script>
 <style scoped>
 .delete{
@@ -63,6 +65,9 @@ font-size: 160%;
 cursor: pointer;
     width: 2%;
     flex-direction: column;
+}
+.delete:hover{
+  color:rgb(138 152 235);
 }
 .descr-name{
   display: flex;
@@ -88,10 +93,12 @@ cursor: pointer;
     padding-right: 3%;
     padding-left: 3%;
     border-left: 1px solid #e5e5e5;
+    font-weight: bold;
+font-size: 150%;
 }
 .product-list-item{
     /* border: 1px solid #e5e5e5; */
-    background: #fafafa;
+    background: #fff;
     margin-bottom: 20px;
     flex: 1 1 100%;
     max-width: 100%;

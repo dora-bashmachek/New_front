@@ -1,7 +1,8 @@
 <template >
-  <div >
-      <div class="flex">
-        
+  <div class="home">
+      <div class="flex"> 
+        <div v-if="fetching" class="loading">Loading...</div>
+    <div v-else-if="error" class="error">Oh no... {{ error }}</div>      
         <div class="text">
       <h1 class="welcome">Welcome!</h1>
         <ul><h2 class="why">why us?</h2>
@@ -11,35 +12,37 @@
   <li class="spisok"><h2>best for customers ;)</h2></li>
 </ul>
 </div>
-        <img class="golova" src="./images/Снимок экрана (8).png" alt="">
+<div class="src">
+        <img class="golova" src="./images/Снимок экрана (7).jpg" alt="">
+        </div>
     </div>
     </div>
 </template>
 
 <script>
-export default {
-    
-}
+  export default {
+      
+  }
 </script>
 
 
 <style scoped>
+.home {
+  text-align: center;
+
+}
 .menu{ 
-    background-color: #ffffff;;
-    /* height: 75px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around; */
-    /* box-shadow: rgb(44 85 146) 0px 19px 38px -29px inset; */
+    background-color: #ffffff;
 }
 .flex{
- display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5%; 
 }
 .text{
-  width: 25%;
+  width: 35%;
   text-align: center;
   font-size: initial;
 }
@@ -52,9 +55,8 @@ export default {
   font-size: 365%;
   height: 0%;
 }
-
 .golova{
-  width: 59%
+  width: 100%;
 }
 .logo{
   display: flex;
