@@ -16,7 +16,7 @@
                 <h2 class="title">{{ data.products_by_id.title }}</h2>
                 <p class="description">{{ data.products_by_id.description }}</p>
                 <p class="price">{{ data.products_by_id.price }}$</p>
-                <a href="#"><button class="card-text-button" @click="addToCart(data.products_by_id)">add to cart</button></a>
+                <a href="#" class="card-text-button" @click="addToCart(data.products_by_id)">add to cart</a>
               </div>
             </div>
           </div>
@@ -66,6 +66,19 @@ export default {
 </script>
 
 <style scoped>
+.card-text-button{
+  border: #000 solid;
+border-radius: 50px;
+width: 25%;
+height: 35px;
+text-align: center;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card-text-button:hover {
+  border-color:rgb(138 152 235);
+}
 div {
     background-color: #f6f6f6;
 }
@@ -93,6 +106,7 @@ div {
   margin: 0px 20px;
   flex-direction: column;
   background-color: #f6f6f6;
+  height: 850px;
 }
 
 .title {
@@ -129,6 +143,7 @@ div {
   text-align: right;
   display: flex;
   flex-direction: column;
+      align-items: flex-end;
 }
 .description {
   display: table-cell;
@@ -141,6 +156,6 @@ div {
 }
 
 .img {
-  width: 805px;
+  width: 620px;
 }
 </style>

@@ -36,7 +36,7 @@
       </div>
       <div class="showmore">
           <div>
-        <a @click="limit += 10">show more</a>
+        <a @click="limit += 10" class="more">show more</a>
         </div>
         </div>
     
@@ -181,6 +181,9 @@ svg {
     justify-content: center;
         padding-bottom: 5%;
         cursor: pointer;
+}
+.more:hover {
+  color: rgb(138 152 235);
 }
 .logo{
   display: flex;

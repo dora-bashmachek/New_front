@@ -7,7 +7,7 @@
     <RouterLink to="/products" class="ducts">Products</RouterLink> <p style="color:#2c5592">|</p> 
     <RouterLink to="/login" class="log">Login</RouterLink> <p style="color:#2c5592">|</p> 
     <RouterLink to="/cart" class="caart">Cart</RouterLink> <p style="color:#2c5592">|</p>
-    <RouterLink to="/fav" class="faav">Fav</RouterLink>
+    <RouterLink to="/favourite" class="faav">Favourite</RouterLink>
     </div></div>
     <RouterView />
 

@@ -94,7 +94,7 @@ cursor: pointer;
     padding-left: 3%;
     border-left: 1px solid #e5e5e5;
     font-weight: bold;
-font-size: 150%;
+font-size: 140%;
 }
 .product-list-item{
     /* border: 1px solid #e5e5e5; */
