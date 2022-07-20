@@ -17,6 +17,7 @@
                 <p class="description">{{ data.products_by_id.description }}</p>
                 <p class="price">{{ data.products_by_id.price }}$</p>
                 <a href="#" class="card-text-button" @click="addToCart(data.products_by_id)">add to cart</a>
+                <a href="/cart"><button class="card-text-button" @click="addToCart(data.products_by_id)">buy now</button></a>
               </div>
             </div>
           </div>

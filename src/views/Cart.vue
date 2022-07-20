@@ -3,12 +3,13 @@
 <div class="container">
   <div class="row">
     <div class="product-list-item">
-      <div v-if="fetching" class="loading">Loading...</div>
-    <div v-else-if="error" class="error">Oh no... {{ error }}</div>
+      <!-- <div v-if="fetching" class="loading">Loading...</div> -->
+    <!-- <div v-else-if="error" class="error">Oh no... {{ error }}</div> -->
         <div class="no-gutters ">
      <!-- <div class="product-about"> -->
      <div class="product-about" v-for="(p, index) in cart"
       :key="p?.id" >
+      
         <div class="product-image">
      <img class="img" :src="'http://38.242.229.113:8055/assets/' + p?.image?.id + '?width=190&height=200'" alt="">
      </div> 
@@ -53,7 +54,7 @@
       return {
         cart,
         deleteFromCart,
-        deleteFromCartLocal
+        deleteFromCartLocal,
       }
     },
   };

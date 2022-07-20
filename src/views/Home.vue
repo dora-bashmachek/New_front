@@ -1,8 +1,8 @@
 <template >
   <div class="home">
       <div class="flex"> 
-        <div v-if="fetching" class="loading">Loading...</div>
-    <div v-else-if="error" class="error">Oh no... {{ error }}</div>      
+        <!-- <div v-if="fetching" class="loading">Loading...</div> -->
+    <!-- <div v-else-if="error" class="error">Oh no... {{ error }}</div>       -->
         <div class="text">
       <h1 class="welcome">Welcome!</h1>
         <ul><h2 class="why">why us?</h2>
